@@ -22,7 +22,7 @@ from kafka import KafkaConsumer, KafkaProducer
 class Consumer():
     def __init__(self):
         multiprocessing.Process.__init__(self)
-        connection.setup(['127.0.0.1'], "emp_info", protocol_version=3)
+        connection.setup(['127.0.0.1'], "emp1", protocol_version=3)
         sync_table(ExampleModel)
         print ('init done')
 
@@ -37,7 +37,7 @@ class Consumer():
 
         for message in consumer:
             print(message.value)
-            em = ExampleModel.create(example_type=0, description=message.value, created_at=datetime.now())
+            em = ExampleModel.create(example_type=0, description=str(message.value), created_at=datetime.now())
             print ('****abc',em)
 
 
